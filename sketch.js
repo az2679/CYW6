@@ -1,10 +1,8 @@
 let cellSize;
 let colr=[]
-// let grid1, grid2
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   colorMode(RGB);
   stroke(0)
 }
@@ -12,9 +10,9 @@ function setup() {
 function draw() {
   background('rgba(213,209,218,0.54)');
   
-  
   // cellSize = min(width / 10, height / 10);
   
+  //I think this is fine as is, wouldn't benefit much from refactoring
   // //rectangular grid in background, recode decode 1
   // for (let x = cellSize -50; x < width; x += cellSize) {
   //   for (let y = cellSize -50; y < height; y += cellSize) {
@@ -136,10 +134,9 @@ function draw() {
     rect(60, height-80, 20, 60);
     fill(to);
     rect(80, height-70, 20, 60);
-  
-
 
   
+  solidSticks(width*0.35, height*0.55, 255)
   //  //white columns
   // for(let x=width*0.35; x<width*0.9; x+=60){
   //   for (let y=height*0.55; y<height*0.75; y+=60){
@@ -336,6 +333,16 @@ function gradSticks(x, y, color1, color2){
   }
 }
 
+
+
+function solidSticks(x, y, color1) {
+  for(let i=x; i<x*2.5; i+=60){
+    for (let j=y; j<y*1.3; j+=60){
+      fill(color1)
+      rect(i, j+5, 30, 60)
+      }
+    }
+}
 
 
 
