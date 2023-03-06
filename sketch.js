@@ -99,6 +99,7 @@ function draw() {
   //   }
   // }
   
+  
   let grid4 = new rotatedGrid(200, 75, 5, 3, 12, 'rgba(213,209,218,0.95)', 'rgba(213,209,218,0.95)')
   grid4.show()
   // //rotated rectangles, recode decode 1
