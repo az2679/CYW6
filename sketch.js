@@ -1,11 +1,8 @@
 let cellSize;
-let grid1
+// let grid1, grid2
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
-
-  grid1 = new Grid(100, 50, 80, 40, 'rgb(190,72,92)', 'rgb(37,54,93)')
 
   colorMode(RGB);
   stroke(0)
@@ -40,6 +37,9 @@ function draw() {
   //   }
   // } 
   
+  let grid3 = new squareGrid(350, 0, 75, width/15, 'rgb(37,54,93)', 'rgb(190,72,92)')
+  grid3.show()
+
   //   //vertical grid
   // for(let x=350; x<width-150; x+=15){
   //   for (let y=0; y<height; y+=15){
@@ -80,6 +80,8 @@ function draw() {
   //   }
   // }
   
+  let grid1 = new horizontalGrid(100, 50, 80, 40, 'rgb(190,72,92)', 'rgb(37,54,93)')
+  grid1.show()
   //   //base, large grid below
   // for (let y=50; y<400; y+=40){
   //   for(let x=100; x < 400; x+=40){
@@ -93,7 +95,9 @@ function draw() {
   //   rect(x, y, 80,40)
   //   }
   // }
-  
+
+  let grid2 = new verticalGrid(150, 100, 30, 60, 'rgb(36,62,122)', 150)
+  grid2.show()
   //  //light blue grid on top
   // for(let x=150; x<300; x+=30){
   //   for (let y=100; y<250; y+=30){
@@ -196,9 +200,9 @@ function draw() {
   //     }
   //   }
 
-  // grid1.colr()
-  grid1.show()
-  // grid1.show()
+
+ 
+
   
 
   noLoop()
@@ -213,7 +217,7 @@ function windowResized() {
 }
 
 
-class Grid{
+class horizontalGrid{
   constructor(x, y, w, h, color1, color2){
     this.x = x;
     this.y = y;
@@ -226,14 +230,12 @@ class Grid{
   show(){
     for(let j=this.y; j<this.h*10; j+=this.h){
       for(let i=this.x; i<this.h*10; i+=this.h){
-
         let startColor = color(this.color1)
         let endColor = color(this.color2);
         let grad = lerpColor(startColor, endColor, i/j*0.6)
-    
         fill(grad) 
         stroke(0)
-
+        strokeWeight(1)
         rect(i, j, this.w, this.h)
       }
     }
@@ -242,16 +244,60 @@ class Grid{
 
 }
 
+class verticalGrid{
+  constructor(x, y, w, h, color1, color2){
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.color1 = color1;
+    this. color2 = color2;
+  }
 
-// for (let y=50; y<400; y+=40){
-//   for(let x=100; x < 400; x+=40){
-  
-//   let startColor = color('rgb(190,72,92)')
-//   let endColor = color('rgb(37,54,93)');
-//   let grad = lerpColor(startColor, endColor, x/y*0.6)
-    
-//   fill(grad) 
-//   stroke(0)
-//   rect(x, y, 80,40)
-//   }
-// }
+  show(){
+    for(let i=this.x; i<this.w*10; i+=this.w){
+      for(let j=this.y; j<this.w*8; j+=this.w){
+        let startColor = color(this.color1)
+        let endColor = color(this.color2);
+        let grad = lerpColor(startColor, endColor, i/j*0.3)
+        fill(grad) 
+        strokeWeight(1)
+        stroke(255)
+        rect(i, j, this.w, this.h)
+      }
+    }
+  }
+}
+
+
+
+
+class squareGrid{
+  constructor(x, y, col, row, color1, color2){
+    this.x = x;
+    this.y = y;
+    this.col = col;
+    this.row = row;
+    this.color1 = color1;
+    this. color2 = color2;
+  }
+
+  show(){
+    for(let i=this.x; i<this.col*15; i+=15){
+      for(let j=this.y; j<this.row*15; j+=15){
+        let startColor = color(this.color1)
+        let endColor = color(this.color2);
+        let grad = lerpColor(startColor, endColor, i/j*0.2)
+        fill(grad) 
+        strokeWeight(0.01)
+        stroke(255)
+        square(i, j, 15)
+      }
+    }
+  }
+}
+
+
+
+
+
