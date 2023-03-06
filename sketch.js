@@ -10,31 +10,31 @@ function setup() {
 function draw() {
   background('rgba(213,209,218,0.54)');
   
-  // cellSize = min(width / 10, height / 10);
+  cellSize = min(width / 10, height / 10);
   
   //I think this is fine as is, wouldn't benefit much from refactoring
-  // //rectangular grid in background, recode decode 1
-  // for (let x = cellSize -50; x < width; x += cellSize) {
-  //   for (let y = cellSize -50; y < height; y += cellSize) {
-  //   push()
-  //   translate(x,y)
-  //   // rotate(0.5)
+  //rectangular grid in background, recode decode 1
+  for (let x = cellSize -50; x < width; x += cellSize) {
+    for (let y = cellSize -50; y < height; y += cellSize) {
+    push()
+    translate(x,y)
+    // rotate(0.5)
       
-  //   let chance = random(1);
-  //   if (chance < 0.5) {
-  //     sign = 1;
-  //   } else {
-  //     sign = -1;
-  //   }
-  //   let angle = random(0, -60 * sign);
-  //   rotate(angle);
+    let chance = random(1);
+    if (chance < 0.5) {
+      sign = 1;
+    } else {
+      sign = -1;
+    }
+    let angle = random(0, -60 * sign);
+    rotate(angle);
       
-  //   stroke(255)
-  //   fill('rgba(210,209,211,0.41)')
-  //   rect(0, 0, 20, 10)
-  //   pop()
-  //   }
-  // } 
+    stroke(255)
+    fill('rgba(210,209,211,0.41)')
+    rect(0, 0, 20, 10)
+    pop()
+    }
+  } 
   
   let grid3 = new squareGrid(350, 0, 75, width/15, 15, 'rgb(37,54,93)', 'rgb(190,72,92)')
   grid3.show()
@@ -52,25 +52,21 @@ function draw() {
   //   }
   // }
 
+  diagonalSticks(width*0.05, height*0.5, 'rgb(196,32,60)', 'rgba(225,220,229,0.97)')
   //  //pink rotated columns
   // for(let x=width*0.05; x<width*1.4; x+=40){
   //   for (let y=height*0.5; y<height*0.7; y+=60){
-      
   //   push()
   //   translate(110, -200)
   //   rotate(0.5)
-    
   //   let startColor = color('rgb(196,32,60)');
   //   let endColor = color('rgba(225,220,229,0.97)');
   //   let grad = lerpColor(startColor, endColor, x/y*0.5)
-    
   //   stroke('rgba(227,223,231,0.54)')
   //   fill(grad)
   //   rect(x, y, 30, 60)
-    
   //   rect(x, y-50, 30, 60)
   //   rect(x, y+100, 30, 60)
-    
   //   pop()
   //   }
   // }
@@ -116,14 +112,12 @@ function draw() {
   //     pop()
   //   }
   // }
-  
 
 
-  //I thought about making a loop but I need to specify the colors. 
+  //I thought about making a loop but I need to specify the colors. >> i could use method with gradSticks but I don't really need to repeat this part.
   //color palette
     let from = color('rgb(190,72,92)')
     let to = color('rgb(37,54,93)');
-
     let interA = lerpColor(from, to, 0.33);
     let interB = lerpColor(from, to, 0.66);
     fill(from);
@@ -176,11 +170,6 @@ function draw() {
   //   fill(stickMiddle2);
   //   rect((width*0.45)+120, (height*0.55)+120, 30, 60);
   // strokeWeight(1)
-
-
-
-  
-
   
 
   noLoop()
@@ -275,7 +264,6 @@ class squareGrid{
 
 }
 
-
 class rotatedGrid{
   constructor(x, y, col, row, siz, color1, color2){
     this.x = x;
@@ -307,9 +295,6 @@ class rotatedGrid{
 }
 
 
-
-
-
 function gradSticks(x, y, color1, color2){
   strokeWeight(1.5)
   let stickStart = color('rgb(214,53,80)')
@@ -333,8 +318,6 @@ function gradSticks(x, y, color1, color2){
   }
 }
 
-
-
 function solidSticks(x, y, color1) {
   for(let i=x; i<x*2.5; i+=60){
     for (let j=y; j<y*1.3; j+=60){
@@ -346,6 +329,25 @@ function solidSticks(x, y, color1) {
 
 
 
+function diagonalSticks(x, y, color1, color2){
+  for(let i=x; i<x*30; i+=40){
+    for (let j=y; j<y*1.5; j+=60){
+    push()
+    translate(110, -200)
+    rotate(0.5)
+    let startColor = color('rgb(196,32,60)');
+    let endColor = color('rgba(225,220,229,0.97)');
+    let grad = lerpColor(startColor, endColor, i/j*0.5)
+    stroke('rgba(227,223,231,0.54)')
+    fill(grad)
+   //cant loop because plus/minus 
+    rect(i, j, 30, 60)
+    rect(i, j-50, 30, 60)
+    rect(i, j+100, 30, 60)
+    pop()
+    }
+  }
+}
 
  
 
