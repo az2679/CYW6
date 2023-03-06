@@ -1,4 +1,5 @@
 let cellSize;
+let colr=[]
 // let grid1, grid2
 
 function setup() {
@@ -121,20 +122,20 @@ function draw() {
 
 
   //I thought about making a loop but I need to specify the colors. 
-  // //color palette
-  //   let from = color('rgb(190,72,92)')
-  //   let to = color('rgb(37,54,93)');
+  //color palette
+    let from = color('rgb(190,72,92)')
+    let to = color('rgb(37,54,93)');
 
-  //   let interA = lerpColor(from, to, 0.33);
-  //   let interB = lerpColor(from, to, 0.66);
-  //   fill(from);
-  //   rect(20, height-80, 20, 60);
-  //   fill(interA);
-  //   rect(40, height-70, 20, 60);
-  //   fill(interB);
-  //   rect(60, height-80, 20, 60);
-  //   fill(to);
-  //   rect(80, height-70, 20, 60);
+    let interA = lerpColor(from, to, 0.33);
+    let interB = lerpColor(from, to, 0.66);
+    fill(from);
+    rect(20, height-80, 20, 60);
+    fill(interA);
+    rect(40, height-70, 20, 60);
+    fill(interB);
+    rect(60, height-80, 20, 60);
+    fill(to);
+    rect(80, height-70, 20, 60);
   
 
 
@@ -147,6 +148,7 @@ function draw() {
   //     }
   //   }
   
+  gradSticks(width*0.45, height*0.55, 'rgb(214,53,80)', 'rgb(3,29,88)')
   // //for 3 gradient sticks
   //   strokeWeight(1.5)
   //   let stickStart = color('rgb(214,53,80)')
@@ -155,48 +157,32 @@ function draw() {
   //   let stickMiddle2 = lerpColor(stickStart, stickEnd, 0.5);
   //   let stickMiddle3 = lerpColor(stickStart, stickEnd, 0.75);
   //   stroke('rgba(213,209,218,0.54)')
-  
+  //
   //   fill(stickMiddle2);
   //   rect(width*0.45, (height*0.55)+0, 30, 60);
   //   fill(stickMiddle3);
   //   rect(width*0.45, (height*0.55)+60, 30, 60);
   //   fill(stickEnd);
   //   rect(width*0.45, (height*0.55)+120, 30, 60);
-  
+  //
   //   fill(stickMiddle1);
   //   rect((width*0.45)+60, (height*0.55)+0, 30, 60);
   //   fill(stickMiddle2);
   //   rect((width*0.45)+60, (height*0.55)+60, 30, 60);
   //   fill(stickMiddle3);
   //   rect((width*0.45)+60, (height*0.55)+120, 30, 60);
-  
+  //
   //   fill(stickStart);
   //   rect((width*0.45)+120, (height*0.55)+0, 30, 60);
   //   fill(stickMiddle1);
   //   rect((width*0.45)+120, (height*0.55)+60, 30, 60);
   //   fill(stickMiddle2);
   //   rect((width*0.45)+120, (height*0.55)+120, 30, 60);
-  
-  // //trying to make 3 stick gradients cleaner
-  //  // for(let x=width*0.45; x<width*0.5; x+=60){
-  //  //  for (let y=height*0.5; y<height*0.7; y+=60){
-  //  //    let grad = lerpColor(stickEnd, stickStart, 0)
-  //  //    fill(grad)
-  //  //    rect(x, y, 30, 60)
-  //  //     // console.log(x,y) y=342 402 462, x=283. want 0, 0.25, 0.5. would need a lot of math
-  //  //  }
-  //  //  }
-  
   // strokeWeight(1)
 
-  // for (let y=50; y<400; y+=40){
-  //     for(let x=100; x < 400; x+=40){
-  //     rect(x, y, 80,40)
-  //     }
-  //   }
 
 
- 
+  
 
   
 
@@ -265,13 +251,6 @@ class verticalGrid{
 
 }
 
-  // for(let x=150; x<300; x+=30){
-  //   for (let y=100; y<250; y+=30){
-// 150, 100, 5, 5
-//   let grid2 = new verticalGrid(150, 100, 5, 5, 30, 'rgb(36,62,122)', 150)
-//   grid2.show()
-
-
 class squareGrid{
   constructor(x, y, col, row, siz, color1, color2){
     this.x = x;
@@ -329,6 +308,43 @@ class rotatedGrid{
     }
   }
 }
+
+
+
+
+
+function gradSticks(x, y, color1, color2){
+  strokeWeight(1.5)
+  let stickStart = color('rgb(214,53,80)')
+  let stickEnd = color('rgb(3,29,88)');
+  stroke('rgba(213,209,218,0.54)')
+  for(let i=0; i<1.1; i+=0.25){
+    colr.push(lerpColor(stickStart, stickEnd, i))
+  }
+  for(let j=2; j<5; j++){
+    fill(colr[j])
+    // rect(x, ((y+(60*(j-2))), 30, 60))     
+    rect(x, ((y+(60*j))-120), 30, 60)          
+  }
+  for(let j=1; j<4; j++){
+    fill(colr[j])
+    rect(x+60, ((y+(60*j))-60), 30, 60)           
+  }
+  for(let j=0; j<3; j++){
+    fill(colr[j])
+    rect(x+120, (y+ (60*j)), 30, 60)             
+  }
+}
+
+
+
+
+
+ 
+
+
+
+
 
 
 
