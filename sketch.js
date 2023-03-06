@@ -37,22 +37,18 @@ function draw() {
   //   }
   // } 
   
-  let grid3 = new squareGrid(350, 0, 75, width/15, 'rgb(37,54,93)', 'rgb(190,72,92)')
+  let grid3 = new squareGrid(350, 0, 75, width/15, 15, 'rgb(37,54,93)', 'rgb(190,72,92)')
   grid3.show()
-
   //   //vertical grid
   // for(let x=350; x<width-150; x+=15){
   //   for (let y=0; y<height; y+=15){
-    
   //   let startColor = color('rgb(37,54,93)')
   //   let endColor = color('rgb(190,72,92)');
   //   let grad = lerpColor(startColor, endColor, x/y*0.2)
-      
   //   fill(grad) 
   //   strokeWeight(0.01)
   //   stroke(255)
   //   rect(x, y, 15)
-      
   //   strokeWeight(1)
   //   }
   // }
@@ -85,11 +81,9 @@ function draw() {
   //   //base, large grid below
   // for (let y=50; y<400; y+=40){
   //   for(let x=100; x < 400; x+=40){
-    
   //   let startColor = color('rgb(190,72,92)')
   //   let endColor = color('rgb(37,54,93)');
   //   let grad = lerpColor(startColor, endColor, x/y*0.6)
-      
   //   fill(grad) 
   //   stroke(0)
   //   rect(x, y, 80,40)
@@ -101,17 +95,17 @@ function draw() {
   //  //light blue grid on top
   // for(let x=150; x<300; x+=30){
   //   for (let y=100; y<250; y+=30){
-      
   //   let startColor = color('rgb(36,62,122)');
   //   let endColor = color(150);
   //   let grad = lerpColor(startColor, endColor, x/y*0.3)
-      
   //   fill(grad)
   //   stroke(255)
   //   rect(x, y, 30, 60)
   //   }
   // }
   
+  let grid4 = new rotatedGrid(200, 75, 5, 3, 12, 'rgba(213,209,218,0.95)', 'rgba(213,209,218,0.95)')
+  grid4.show()
   // //rotated rectangles, recode decode 1
   //  for(let x=200; x<250; x+=12){
   //   for (let y=75; y<110; y+=12){
@@ -126,7 +120,7 @@ function draw() {
   
 
 
-  
+  //I thought about making a loop but I need to specify the colors. 
   // //color palette
   //   let from = color('rgb(190,72,92)')
   //   let to = color('rgb(37,54,93)');
@@ -142,6 +136,7 @@ function draw() {
   //   fill(to);
   //   rect(80, height-70, 20, 60);
   
+
 
   
   //  //white columns
@@ -263,40 +258,77 @@ class verticalGrid{
         fill(grad) 
         strokeWeight(1)
         stroke(255)
-        rect(i, j, this.w, this.h)
+        rect(i, j, 30, 60)
       }
     }
   }
+
 }
 
-
+  // for(let x=150; x<300; x+=30){
+  //   for (let y=100; y<250; y+=30){
+// 150, 100, 5, 5
+//   let grid2 = new verticalGrid(150, 100, 5, 5, 30, 'rgb(36,62,122)', 150)
+//   grid2.show()
 
 
 class squareGrid{
-  constructor(x, y, col, row, color1, color2){
+  constructor(x, y, col, row, siz, color1, color2){
     this.x = x;
     this.y = y;
     this.col = col;
     this.row = row;
+    this.siz = siz
     this.color1 = color1;
     this. color2 = color2;
   }
 
   show(){
-    for(let i=this.x; i<this.col*15; i+=15){
-      for(let j=this.y; j<this.row*15; j+=15){
+    for(let i=this.x; i<this.col*this.siz; i+=this.siz){
+      for(let j=this.y; j<this.row*this.siz; j+=this.siz){
         let startColor = color(this.color1)
         let endColor = color(this.color2);
         let grad = lerpColor(startColor, endColor, i/j*0.2)
         fill(grad) 
         strokeWeight(0.01)
         stroke(255)
-        square(i, j, 15)
+        square(i, j, this.siz)
+      }
+    }
+  }
+
+}
+
+
+class rotatedGrid{
+  constructor(x, y, col, row, siz, color1, color2){
+    this.x = x;
+    this.y = y;
+    this.col = col;
+    this.row = row;
+    this.siz = siz
+    this.color1 = color1;
+    this. color2 = color2;
+  }
+
+  show(){
+    for(let i=this.x; i<this.x+(this.col*this.siz); i+=this.siz){
+      for(let j=this.y; j<this.y+(this.row*this.siz); j+=this.siz){
+        let startColor = color(this.color1)
+        let endColor = color(this.color2);
+        let grad = lerpColor(startColor, endColor, i/j*0.2)
+        fill(grad) 
+        strokeWeight(1)
+        stroke(255)
+        push()
+        translate(i,j)
+        rotate(1)
+        square(0, 0, this.siz)
+        pop()
       }
     }
   }
 }
-
 
 
 
